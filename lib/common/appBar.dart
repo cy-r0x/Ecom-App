@@ -4,7 +4,16 @@ import 'package:icons_plus/icons_plus.dart';
 import '../utils/colors.dart';
 
 class FAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const FAppbar({super.key});
+  final String title;
+  final Icon left, right;
+  final bool isBack;
+  const FAppbar({
+    super.key,
+    required this.title,
+    this.left = const Icon(Iconsax.notification_1_outline),
+    this.right = const Icon(Bootstrap.cart),
+    this.isBack = false,
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -13,16 +22,10 @@ class FAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Mega Shop",
-          style: GoogleFonts.dmSans(color: FColors.oceanBlue),
-        ),
+        title: Text(title, style: GoogleFonts.dmSans(color: FColors.oceanBlue)),
         centerTitle: true,
-        actions: [
-          Icon(Iconsax.notification_1_outline),
-          SizedBox(width: 20),
-          Icon(Bootstrap.cart),
-        ],
+        actions: [left, SizedBox(width: 20), right, SizedBox(width: 20)],
+        leading: isBack ? Icon(Iconsax.arrow_left_2_outline) : null,
       ),
     );
   }
